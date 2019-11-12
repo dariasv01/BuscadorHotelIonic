@@ -1,4 +1,3 @@
-import { Comparador } from './../core/model/comparador';
 import { GeneradorHoteles } from './../core/model/generador-hoteles';
 import { Hotel } from './../core/model/hotel';
 import { Injectable } from '@angular/core';
@@ -18,6 +17,7 @@ export class PeticionControllerService {
      private hotelesEnsenar: Hotel[] = [];
      constructor(public router: Router) {
           this.hoteles = new GeneradorHoteles().getHoteles();
+          console.log(this.hoteles)
      }
      lanzar() {
           this.$hotelesEnsenar = new Seleccion(this.habitacionMin, this.habitacionMax, this.puntuacion, this.hoteles).comprobar();

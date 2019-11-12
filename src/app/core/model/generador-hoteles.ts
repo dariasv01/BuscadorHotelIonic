@@ -15,7 +15,7 @@ export class GeneradorHoteles {
     public getHoteles(): Hotel[] {
 
         for (let index = 0; index < this._arraynombresHoteles.length; index++) {
-            this._arrayHoteles.push(new Hotel(this._arraynombresHoteles[index], (this.obtenerCategoria()), this.generaraHabitacion()));
+            this._arrayHoteles.push(new Hotel(this._arraynombresHoteles[index], (this.obtenerCategoria()), this.generaraHabitacion(this.getRandom(1,4))));
 
         }
         return this._arrayHoteles;
@@ -23,11 +23,14 @@ export class GeneradorHoteles {
     public getRandom(min: number, max: number): number {
         return Math.round(Math.random() * (max - min) + min);
     }
-    public generaraHabitacion(): Habitacion[] {
+    public generaraHabitacion(numeroHabitaciones): Habitacion[] {
         let arrayHabitaciones = [];
       
-       
-            arrayHabitaciones.push(new Habitacion(new TipoHabitacion((this.obtenerCapacidad()), (this.obtenerCama()), new Complemento(this.obtenerExtras(this.getRandom(0, 4)))), this.getRandom(0, 1000), this._arrayImagenes[this.getRandom(0, this._arrayImagenes.length-1)]));
+            for (let index = 0; index < numeroHabitaciones; index++) {
+                arrayHabitaciones.push(new Habitacion(new TipoHabitacion((this.obtenerCapacidad()), (this.obtenerCama()), new Complemento(this.obtenerExtras(this.getRandom(0, 4)))), this.getRandom(0, 1000), this._arrayImagenes[this.getRandom(0, this._arrayImagenes.length-1)]));
+                
+            }
+            
         
         return arrayHabitaciones;
     }

@@ -26,7 +26,7 @@
       <ion-label>Camas</ion-label>
       <ion-select [(ngModel)]="seleccionCama" class="tamanoLetter">
         <ion-select-option value="">Seleciona</ion-select-option>
-        <ion-select-option *ngFor="let camas of _arrayCama" value="{{arrayCategoria.indexOf(camas)}}">{{camas}}
+        <ion-select-option *ngFor="let camas of _arrayCama" value="{{_arrayCama.indexOf(camas)}}">{{camas}}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -35,7 +35,7 @@
       <ion-label>Capacidad</ion-label>
       <ion-select [(ngModel)]="seleccionCapacidad" class="tamanoLetter">
         <ion-select-option value="">Seleciona</ion-select-option>
-        <ion-select-option *ngFor="let capacidad of arrayCapacidad" value="{{arrayCategoria.indexOf(capacidad)}}"> 
+        <ion-select-option *ngFor="let capacidad of arrayCapacidad" value="{{arrayCapacidad.indexOf(capacidad)}}"> 
           {{capacidad}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -52,8 +52,8 @@
     <ion-item>
       <ion-label>Precio </ion-label>
       <ion-range class="tamanoLetter" dual-knobs="true" pin="true" min="0" max="1000" [(ngModel)]="knobValues">
-        <ion-label class="tamanoLetter" slot="start">{{knobValues.lower}}</ion-label>
-        <ion-label class="tamanoLetter" slot="end">{{knobValues.upper}}</ion-label>
+        <ion-label class="tamanoLetter" slot="start">{{knobValues.lower}}€</ion-label>
+        <ion-label class="tamanoLetter" slot="end">{{knobValues.upper}}€</ion-label>
       </ion-range>
     </ion-item>
 
@@ -62,7 +62,7 @@
 
   </ion-list>
   <br>
-  <ion-button expand="block" (click)="updatePriceLabels()">BUSCAR</ion-button>
+  <ion-button expand="block" (click)="updatePriceLabels()">  <ion-icon name="search"></ion-icon>BUSCAR</ion-button>
   <br><br><br>
   <ion-footer class="labelFooter">Sergio Galán y David Arias</ion-footer>
 </ion-content>

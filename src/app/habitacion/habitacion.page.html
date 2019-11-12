@@ -1,9 +1,65 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>habitacion</ion-title>
+    <ion-title>
+      <ion-button routerLink="/resultado">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+      Habitacion
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card class="cardHoteles">
+
+    <ion-card-header>
+
+      <ion-card-title>{{hotel.nombre}}</ion-card-title>
+      <ion-card-subtitle>{{hotel.categoria}}</ion-card-subtitle>
+
+    </ion-card-header>
+    <ion-card-content>
+      <img class="imagenHabitacion" src="{{habitacion.imagen}}">
+      <ion-card-subtitle>
+        <table>
+          <tr>
+            <td>
+              <p>Precio:</p>
+            </td>
+            <td>
+              <p>{{habitacion.precio}}€</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Capacidad:</p>
+            </td>
+            <td>
+              <p>{{habitacion.tipoHabitacion.capacidad}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Camas:</p>
+            </td>
+            <td>
+              <p>{{habitacion.tipoHabitacion.camas}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Extras:</p>
+            </td>
+            <td>
+          <tr *ngFor="let extras of habitacion.tipoHabitacion.complementos.nombre">
+            <td>
+              <p>{{extras}}</p>
+            </td>
+          </tr>
+        </table>
+      </ion-card-subtitle>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

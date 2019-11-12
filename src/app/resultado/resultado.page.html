@@ -1,15 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>resultado</ion-title>
+    <ion-title>
+      <ion-button routerLink="/peticion">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+      </ion-button>
+      Hoteles
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-  <ion-button routerLink="/peticion">
-    <ion-icon slot="start" name="arrow-back"></ion-icon>
-  </ion-button>
-
   <ion-card class="cardHoteles" *ngFor="let hoteles of _arrayHoteles">
 
     <ion-card-header>
@@ -18,13 +18,9 @@
       <ion-card-subtitle>{{hoteles.categoria}}</ion-card-subtitle>
 
     </ion-card-header>
-
-    <ion-card-content *ngFor="let habitacion of hoteles.tiposHabitacion">
-
-      <img class="imagenHabitacion" src="{{habitacion.imagen}}">
-
-    </ion-card-content>
-    <ion-button fill="outline">View</ion-button>
+    <ion-card-content button=true  *ngFor="let habitacion of hoteles.tiposHabitacion" (click)="mostrarHabitacion(habitacion,hoteles)">
+        <img class="imagenHabitacion" src="{{habitacion.imagen}}">
+      </ion-card-content>
   </ion-card>
 
 

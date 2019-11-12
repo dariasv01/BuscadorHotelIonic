@@ -1,12 +1,7 @@
-import { Camas } from './../core/model/camas';
-import { TipoHabitacion } from './../core/model/tipoHabitacion';
-import { Categoria } from './../core/model/categoria';
-import { Seleccion } from './../core/model/seleccion';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Hotel } from '../core/model/hotel';
 import { Habitacion } from '../core/model/habitacion';
-import { PeticionControllerService } from '../shared/peticion-controller.service';
 
 @Component({
   selector: 'app-resultado',
@@ -14,24 +9,24 @@ import { PeticionControllerService } from '../shared/peticion-controller.service
   styleUrls: ['./resultado.page.scss'],
 })
 export class ResultadoPage implements OnInit {
-  seleccionDebug;
-  public _seleccion: Seleccion;
-  public _arrayHoteles: Hotel[];
-  private _arrayHabitacion: Habitacion[];
-  private result
+  private _arrayHoteles: Hotel[];
 
 
 
 
-  constructor(public router: Router, public peticionService: PeticionControllerService) {
+  constructor(public router: Router) {
 
     this._arrayHoteles = this.router.getCurrentNavigation().extras.state.hoteles;
-    // console.log(this._arrayHoteles[0].categoria);
-    // this.result = this._arrayHoteles.filter(habitacion =>  habitacion.categoria === this._seleccion.categoria);
-    // console.log(this.result);
-
-
-
+  }
+  private mostrarHabitacion(habitacionMostrar, hotelMostrar) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        habitacion: habitacionMostrar,
+        hotel: hotelMostrar
+      }
+    }
+    this.router.navigate(['habitacion'], navigationExtras);
+    console.log(hotelMostrar)
   }
 
 

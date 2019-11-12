@@ -35,10 +35,14 @@ export class Seleccion {
             this.$ensenarHabitacion = [];
             this.$ensenarHabitacion = element.tiposHabitacion.filter(habitacion => this.habitacionMax.precio > habitacion.precio && this.$habitacionMin.precio < habitacion.precio);
             if (this.$habitacionMax.tipoHabitacion.camas != undefined) {
-                this.$ensenarHabitacion = element.tiposHabitacion.filter(habitacion => this.habitacionMax.tipoHabitacion.camas === habitacion.tipoHabitacion.camas);
+                this.$ensenarHabitacion = this.$ensenarHabitacion.filter(habitacion => this.habitacionMax.tipoHabitacion.camas === habitacion.tipoHabitacion.camas);
             }
             if (this.$habitacionMax.tipoHabitacion.capacidad != undefined) {
-                this.$ensenarHabitacion = element.tiposHabitacion.filter(habitacion => this.habitacionMax.tipoHabitacion.capacidad === habitacion.tipoHabitacion.capacidad);
+                this.$ensenarHabitacion = this.$ensenarHabitacion.filter(habitacion => this.habitacionMax.tipoHabitacion.capacidad === habitacion.tipoHabitacion.capacidad);
+            }
+            if (this.habitacionMax.tipoHabitacion.complementos.nombre.length > 0) {
+                let arrayPeticion = this.habitacionMax.tipoHabitacion.complementos.nombre;
+                this.$ensenarHabitacion = this.$ensenarHabitacion.filter(habitacion => this.extras(arrayPeticion, habitacion.tipoHabitacion.complementos.nombre));
             }
             if (this.$ensenarHabitacion.length != 0) {
                 this.$hotelesEnsenar.push(new Hotel(element.nombre, element.categoria, this.$ensenarHabitacion));
@@ -47,27 +51,22 @@ export class Seleccion {
 
     }
 
-    private comprobarExtras(habitacion: Habitacion) {
-        if (this.habitacionMax.tipoHabitacion.complementos.nombre.length === 0) {
-            this.$ensenarHabitacion.push(habitacion);
-        } else {
-            let arrayExtras = habitacion.tipoHabitacion.complementos.nombre;
-            let arrayPeticion = this.habitacionMax.tipoHabitacion.complementos.nombre;
-            let contador = 0;
-            for (let index = 0; index < arrayPeticion.length; index++) {
-                for (let indexDos = 0; indexDos < arrayExtras.length; indexDos++) {
-                    if (arrayExtras[indexDos] === arrayPeticion[index]) {
-                        contador++;
-                    }
+    private extras(arrayPeticion, arrayExtras) {
+        let contador = 0;
+        for (let index = 0; index < arrayPeticion.length; index++) {
+            for (let indexDos = 0; indexDos < arrayExtras.length; indexDos++) {
+                if (arrayExtras[indexDos] === arrayPeticion[index]) {
+                    contador++;
                 }
             }
-
-            if (contador >= 1 && contador >= arrayPeticion.length) {
-                this.$ensenarHabitacion.push(habitacion)
-
-            }
         }
+        if (contador >= 1 && contador >= arrayPeticion.length) {
+            return true;
+
+        }
+        return false;
     }
+
 
     /**
      * Getter $habitacionMin
